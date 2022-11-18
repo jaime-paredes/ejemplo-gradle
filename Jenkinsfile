@@ -28,12 +28,12 @@ pipeline {
                 echo 'RUN OK'        
             }
         }
-        stage("Test") {
-            steps {
-                echo "TEST"
-                sh "curl -X GET 'http://172.18.0.2:8081/rest/mscovid/test?msg=testing'"            
-            }
-        }
+        // stage("Test") {
+        //     steps {
+        //         echo "TEST"
+        //         sh "curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing'"            
+        //     }
+        // }
         stage("Nexus") {
             steps {
                 echo "NEXUS"
