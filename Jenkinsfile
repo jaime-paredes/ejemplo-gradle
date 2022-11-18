@@ -11,7 +11,7 @@ pipeline {
     parameters{
         choice(name: "BUILD_TOOL", choices: ["maven", "gradle"], description: "Build tool")
     }
-    
+
     stages{
         stage("*** SCRIPT LOAD ***"){
             echo "*** SCRIPT LOAD ***"
@@ -29,7 +29,7 @@ pipeline {
                 }
             }
         }
-        if $params.BUILD_TOOL == "maven" {
+        if ($params.BUILD_TOOL == "maven") {
             echo "maven"
         } else {
             echo "gradle"
