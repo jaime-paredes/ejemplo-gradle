@@ -24,7 +24,8 @@ pipeline {
         stage("Run") {
             steps {
                 echo "RUN"
-                sh "gradle bootRun &"            
+                sh "gradle bootRun &"
+                echo 'RUN OK'        
             }
         }
         stage("Test") {
