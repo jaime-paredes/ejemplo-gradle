@@ -14,26 +14,25 @@ pipeline {
 
     stages{
         stage("*** SCRIPT LOAD ***"){
-            echo "*** SCRIPT LOAD ***"
             steps{
+                echo "*** SCRIPT LOAD ***"
                 script{
                     toolScript = load "${params.BUILD_TOOL}.groovy"
                 }
             }
         }
         stage("*** BUILD ***"){
-            echo "*** BUILD ***"
             steps{
+                echo "*** BUILD ***"
                 script{
                     toolScript.build()
                 }
             }
-        }
-        if ($params.BUILD_TOOL == "maven") {
-            echo "maven"
-        } else {
-            echo "gradle"
-        }
-    
+        }    
+    }
+    if ($params.BUILD_TOOL == "maven") {
+        echo "maven"
+    } else {
+        echo "gradle"
     }
 }
