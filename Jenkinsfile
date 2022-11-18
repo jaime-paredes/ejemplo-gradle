@@ -15,11 +15,7 @@ pipeline {
     stages{
         stage("*** BUILD TOOL ***"){
             steps{
-                if ($params.BUILD_TOOL == "maven") {
-                    echo "Maven!!!"
-                } else {
-                    echo "Gradle!!!"
-                }
+                echo "Using ${params.BUILD_TOOL}!!!"
             }
         }
         stage("*** SCRIPT LOAD ***"){
