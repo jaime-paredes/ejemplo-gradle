@@ -17,7 +17,7 @@ pipeline {
             steps {
                 echo "SONARQUBE ANALYSIS"
                 withSonarQubeEnv(credentialsId: "access_token_sq", installationName: "MySonar") {
-                    sh "maven org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.target=sonar.java.binaries -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build"
+                    sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.target=sonar.java.binaries -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build"
                 }
             }
         }
