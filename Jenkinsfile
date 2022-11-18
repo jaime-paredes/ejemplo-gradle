@@ -13,6 +13,15 @@ pipeline {
     }
 
     stages{
+        stage("*** BUILD TOOL ***"){
+            steps{
+                if ($params.BUILD_TOOL == "maven") {
+                    echo "Maven!!!"
+                } else {
+                    echo "Gradle!!!"
+                }
+            }
+        }
         stage("*** SCRIPT LOAD ***"){
             steps{
                 echo "*** SCRIPT LOAD ***"
@@ -29,10 +38,5 @@ pipeline {
                 }
             }
         }    
-    }
-    if ($params.BUILD_TOOL == "maven") {
-        echo "maven"
-    } else {
-        echo "gradle"
     }
 }
