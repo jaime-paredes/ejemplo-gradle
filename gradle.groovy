@@ -1,12 +1,13 @@
-def build(){
+def buildApp(){
     sh "gradle clean build"
 }
 
-def run(){
+def runApp(){
     sh "gradle bootRun &"
+    sleep(15)
 }
 
-def test(){
+def testApp(){
     sh "gradle test"
 }
 

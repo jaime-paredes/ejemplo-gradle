@@ -1,12 +1,12 @@
-def build(){
+def buildApp(){
     sh "mvn clean compile -e" 
 }
 
-def test(){
+def testApp(){
     sh "mvn clean test -e"
 }
 
-def package(){
+def packageApp(){
     sh "mvn clean package -e"
 }
 
