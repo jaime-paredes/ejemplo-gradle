@@ -28,11 +28,41 @@ pipeline {
         }
         stage("*** BUILD ***"){
             steps{
-                echo "*** BUILD ***"
+                echo "*** BUILDING WITH ${params.BUILD_TOOL} ***"
                 script{
                     toolScript.buildApp()
                 }
             }
-        }    
+        }
+        stage("*** RUN ***") {
+            when {
+                expression { params.BUILD_TOOL == "gradle" }
+            }
+            steps {
+                echo "*** RUNNING WITH ${params.BUILD_TOOL} ***"
+                script{
+                    toolScript.runApp()
+                }
+            }
+        }
+        stage("*** TEST *** "){
+            steps {
+                echo "*** TESTING WITH ${params.BUILD_TOOL} ***"
+                script{
+                    toolScript.testApp()
+                }
+            }            
+        }
+        stage("*** PACKAGE ***") {
+            when {
+                expression { params.BUILD_TOOL == "maven" }
+            }
+            steps {
+                echo "*** PACKAGING WITH ${params.BUILD_TOOL} ***"
+                script{
+                    toolScript.packageApp()
+                }
+            }
+        }
     }
 }
