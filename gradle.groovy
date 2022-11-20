@@ -4,7 +4,6 @@ def buildApp(){
 
 def runApp(){
     sh "gradle bootRun &"
-    sleep(15)
 }
 
 def testApp(){

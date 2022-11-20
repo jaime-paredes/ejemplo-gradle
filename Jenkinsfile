@@ -40,8 +40,12 @@ pipeline {
             }
             steps {
                 echo "*** RUNNING WITH ${params.BUILD_TOOL} ***"
-                script{
-                    toolScript.runApp()
+                timeout(15){
+                    waitUntil{
+                        script{
+                            toolScript.runApp()
+                        }
+                    }
                 }
             }
         }
