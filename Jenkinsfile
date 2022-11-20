@@ -44,6 +44,7 @@ pipeline {
                     waitUntil{
                         script{
                             toolScript.runApp()
+                            return true
                         }
                     }
                 }
