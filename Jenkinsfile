@@ -25,15 +25,16 @@ pipeline {
             steps {
                 echo "RUN"
                 sh "gradle bootRun &"
+                sleep(20)
                 echo 'RUN OK'        
             }
         }
-        // stage("Test") {
-        //     steps {
-        //         echo "TEST"
-        //         sh "curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing'"            
-        //     }
-        // }
+        stage("Test") {
+            steps {
+                echo "TEST"
+                sh "curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing'"            
+            }
+        }
         stage("Nexus") {
             steps {
                 echo "NEXUS"
