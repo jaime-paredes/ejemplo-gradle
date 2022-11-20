@@ -30,7 +30,7 @@ pipeline {
             steps{
                 echo "*** BUILD ***"
                 script{
-                    toolScript.build()
+                    toolScript.buildApp()
                 }
             }
         }    
