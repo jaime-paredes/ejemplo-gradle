@@ -16,7 +16,9 @@ pipeline {
         stage("*** BUILD TOOL ***"){
             steps{
                 echo "Using ${params.BUILD_TOOL}!!!"
-                params.BUILD_TOOL = "${params.BUILD_TOOL.toLowerCase()}"
+                script{ 
+                    params.BUILD_TOOL = "${params.BUILD_TOOL.toLowerCase()}"
+                }
             }
         }
         stage("*** SCRIPT LOAD ***"){
