@@ -17,7 +17,7 @@ pipeline {
             steps{
                 echo "Using ${params.BUILD_TOOL}!!!"
                 script{ 
-                    params.BUILD_TOOL = "${params.BUILD_TOOL.toLowerCase()}"
+                    env.BUILD_TOOL = "${params.BUILD_TOOL.toLowerCase()}"
                 }
             }
         }
@@ -25,13 +25,13 @@ pipeline {
             steps{
                 echo "*** SCRIPT LOAD ***"
                 script{
-                    toolScript = load "${params.BUILD_TOOL}.groovy"
+                    toolScript = load "${env.BUILD_TOOL}.groovy"
                 }
             }
         }
         stage("*** BUILD ***"){
             steps{
-                echo "*** BUILDING WITH ${params.BUILD_TOOL} ***"
+                echo "*** BUILDING WITH ${env.BUILD_TOOL} ***"
                 script{
                     toolScript.buildApp()
                 }
@@ -39,10 +39,10 @@ pipeline {
         }
         stage("*** RUN ***") {
             when {
-                expression { params.BUILD_TOOL == "gradle" }
+                expression { env.BUILD_TOOL == "gradle" }
             }
             steps {
-                echo "*** RUNNING WITH ${params.BUILD_TOOL} ***"
+                echo "*** RUNNING WITH ${env.BUILD_TOOL} ***"
                 timeout(time: 30, unit: 'SECONDS'){
                     waitUntil{
                         script{
@@ -55,7 +55,7 @@ pipeline {
         }
         stage("*** TEST *** "){
             steps {
-                echo "*** TESTING WITH ${params.BUILD_TOOL} ***"
+                echo "*** TESTING WITH ${env.BUILD_TOOL} ***"
                 script{
                     toolScript.testApp()
                 }
@@ -63,10 +63,10 @@ pipeline {
         }
         stage("*** PACKAGE ***") {
             when {
-                expression { params.BUILD_TOOL == "maven" }
+                expression { env.BUILD_TOOL == "maven" }
             }
             steps {
-                echo "*** PACKAGING WITH ${params.BUILD_TOOL} ***"
+                echo "*** PACKAGING WITH ${env.BUILD_TOOL} ***"
                 script{
                     toolScript.packageApp()
                 }
