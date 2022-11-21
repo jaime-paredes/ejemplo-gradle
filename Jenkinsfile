@@ -9,13 +9,14 @@ pipeline {
     }
 
     parameters{
-        choice(name: "BUILD_TOOL", choices: ["maven", "gradle"], description: "Build tool")
+        choice(name: "BUILD_TOOL", choices: ["Maven", "Gradle"], description: "Build tool")
     }
 
     stages{
         stage("*** BUILD TOOL ***"){
             steps{
                 echo "Using ${params.BUILD_TOOL}!!!"
+                params.BUILD_TOOL = "${params.BUILD_TOOL.toLowerCase()}"
             }
         }
         stage("*** SCRIPT LOAD ***"){
