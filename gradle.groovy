@@ -7,7 +7,7 @@ def runApp(){
 }
 
 def testApp(){
-    sh "curl -X GET 'http://localhost:8080/rest/mscovid/test?msg=testing'"
+    sh "curl -X GET 'http://localhost:1010/rest/mscovid/test?msg=testing'"
 }
 
 return this
