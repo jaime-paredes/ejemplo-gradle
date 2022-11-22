@@ -1,9 +1,10 @@
 def toolScript
+def failStage
 
-pipeline {
+pipeline{
     agent any
 
-    tools {
+    tools{
         gradle "gradle"
         maven "maven"
     }
@@ -11,7 +12,7 @@ pipeline {
     parameters{
         choice(name: "BUILD_TOOL", choices: ["Maven", "Gradle"], description: "Build tool")
     }
-
+    try{
     stages{
         stage("*** BUILD TOOL ***"){
             steps{
@@ -37,7 +38,7 @@ pipeline {
                 }
             }
         }
-        stage("*** RUN ***") {
+        stage("*** RUN ***"){
             when {
                 expression { env.BUILD_TOOL == "gradle" }
             }
@@ -61,7 +62,7 @@ pipeline {
                 }
             }            
         }
-        stage("*** PACKAGE ***") {
+        stage("*** PACKAGE ***"){
             when {
                 expression { env.BUILD_TOOL == "maven" }
             }
@@ -72,10 +73,23 @@ pipeline {
                 }
             }
         }
-        stage("*** SLACK IT ***") {
+        stage("*** SLACK IT ***"){
             steps {
                 slackSend channel: 'C04CAGU8ESD', message: 'Slack It!!!'
             }
         }
     }
+    }catch{
+        failStage = env.STAGE_NAME
+    }
+
+    post {
+        always {
+            echo 'I will always say hello in the console.'
+            slackSend channel: 'C04CAGU8ESD',
+                color: COLOR_MAP[currentBuild.currentResult],
+                message: "*${currentBuild.currentResult}:* Job ${failStage}"
+        }
+    }
+
 }
