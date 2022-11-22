@@ -79,7 +79,8 @@ pipeline{
             }
         }
     }
-    }catch{
+    }
+    catch(all){
         failStage = env.STAGE_NAME
     }
 
