@@ -72,5 +72,10 @@ pipeline {
                 }
             }
         }
+        stage("*** SLACK IT ***") {
+            steps {
+                slackSend channel: 'C04CAGU8ESD', message: 'Slack It!!!'
+            }
+        }
     }
 }
