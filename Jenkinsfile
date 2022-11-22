@@ -44,7 +44,7 @@ pipeline{
             }
             steps {
                 echo "*** RUNNING WITH ${env.BUILD_TOOL} ***"
-                timeout(time: 30, unit: 'SECONDS'){
+                timeout(time: 1, unit: 'SECONDS'){
                     waitUntil{
                         script{
                             toolScript.runApp()
