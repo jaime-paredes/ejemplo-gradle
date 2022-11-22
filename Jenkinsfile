@@ -84,7 +84,6 @@ pipeline{
         always {
             echo "I will always say hello in the console."
             slackSend channel: 'C04CAGU8ESD',
-                color: COLOR_MAP[currentBuild.currentResult],
                 message: "*${currentBuild.currentResult}:* Job ${env.STAGE_NAME}"
         }
     }
