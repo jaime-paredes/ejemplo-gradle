@@ -81,7 +81,6 @@ pipeline{
         }
         stage("*** SLACK IT ***"){
             steps {
-                failStage = ENV.STAGE_NAME
                 slackSend channel: 'C04CAGU8ESD', message: 'Slack It!!!'
             }
         }
