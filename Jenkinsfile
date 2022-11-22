@@ -18,7 +18,7 @@ pipeline{
             steps{
                 echo "Using ${params.BUILD_TOOL}!!!"
                 script{ 
-                    failStage = ENV.STAGE_NAME
+                    failStage = env.STAGE_NAME
                     env.BUILD_TOOL = "${params.BUILD_TOOL.toLowerCase()}"
                 }
             }
@@ -27,7 +27,7 @@ pipeline{
             steps{
                 echo "*** SCRIPT LOAD ***"
                 script{
-                    failStage = ENV.STAGE_NAME
+                    failStage = env.STAGE_NAME
                     toolScript = load "${env.BUILD_TOOL}.groovy"
                 }
             }
@@ -36,7 +36,7 @@ pipeline{
             steps{
                 echo "*** BUILDING WITH ${env.BUILD_TOOL} ***"
                 script{
-                    failStage = ENV.STAGE_NAME
+                    failStage = env.STAGE_NAME
                     toolScript.buildApp()
                 }
             }
@@ -50,7 +50,7 @@ pipeline{
                 timeout(time: 5, unit: 'SECONDS'){
                     waitUntil{
                         script{
-                            failStage = ENV.STAGE_NAME
+                            failStage = env.STAGE_NAME
                             toolScript.runApp()
                             return true
                         }
@@ -62,7 +62,7 @@ pipeline{
             steps {
                 echo "*** TESTING WITH ${env.BUILD_TOOL} ***"
                 script{
-                    failStage = ENV.STAGE_NAME
+                    failStage = env.STAGE_NAME
                     toolScript.testApp()
                 }
             }            
@@ -74,7 +74,7 @@ pipeline{
             steps {
                 echo "*** PACKAGING WITH ${env.BUILD_TOOL} ***"
                 script{
-                    failStage = ENV.STAGE_NAME
+                    failStage = env.STAGE_NAME
                     toolScript.packageApp()
                 }
             }
