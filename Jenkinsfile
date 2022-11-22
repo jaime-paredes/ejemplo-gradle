@@ -3,8 +3,6 @@ def failStage
 
 pipeline{
     agent any
-    
-    try{
 
     tools{
         gradle "gradle"
@@ -81,18 +79,13 @@ pipeline{
             }
         }
     }
-    
-    }
-    catch(all){
-        failStage = env.STAGE_NAME
-    }
 
     post {
         always {
-            echo 'I will always say hello in the console.'
+            echo "I will always say hello in the console."
             slackSend channel: 'C04CAGU8ESD',
                 color: COLOR_MAP[currentBuild.currentResult],
-                message: "*${currentBuild.currentResult}:* Job ${failStage}"
+                message: "*${currentBuild.currentResult}:* Job ${env.STAGE_NAME}"
         }
     }
 
