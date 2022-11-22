@@ -3,6 +3,8 @@ def failStage
 
 pipeline{
     agent any
+    
+    try{
 
     tools{
         gradle "gradle"
@@ -12,7 +14,7 @@ pipeline{
     parameters{
         choice(name: "BUILD_TOOL", choices: ["Maven", "Gradle"], description: "Build tool")
     }
-    try{
+
     stages{
         stage("*** BUILD TOOL ***"){
             steps{
@@ -79,6 +81,7 @@ pipeline{
             }
         }
     }
+    
     }
     catch(all){
         failStage = env.STAGE_NAME
